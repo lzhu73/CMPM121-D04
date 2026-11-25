@@ -17,11 +17,22 @@ var meshes := {}  # kit piece name -> Mesh, shared by everything that shows it (
 var segments: Array[MeshInstance3D] = []
 var camera := Camera3D.new()
 var _clock := 0.0
+var food_model := MeshInstance3D.new()
+var score_label := Label.new()
 
 
 func _ready() -> void:
 	meshes = Stage.load_kit()
 	_build_stage()
+
+	food_model.mesh = meshes["food"]
+	add_child(food_model)
+
+	add_child(score_label)
+	score_label.position = Vector2(16, 16)
+	score_label.add_theme_constant_override("outline_size", 4)
+
+	_draw_food_and_score()
 	_draw_dragon()
 
 
@@ -38,6 +49,7 @@ func _process(delta: float) -> void:
 		_clock -= TICK_SECONDS
 		session.tick()
 		_draw_dragon()
+		_draw_food_and_score()
 	_follow(delta)
 
 
@@ -53,6 +65,13 @@ func _follow(delta: float) -> void:
 	var target := _center(session.dragon.body[0]) + CAMERA_OFFSET
 	camera.position = camera.position.lerp(target, 1 - exp(-3 * delta))
 	camera.look_at(camera.position - CAMERA_OFFSET)
+
+
+func _draw_food_and_score() -> void:
+	food_model.visible = session.food != Session.NO_FOOD
+	if food_model.visible:
+		food_model.position = _center(session.food)
+	score_label.text = "Score: %d" % session.score
 
 
 func _draw_dragon() -> void:

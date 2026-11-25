@@ -89,7 +89,7 @@ def srgb(hex_code):
 def make_materials():
     """One material per voxel character. Runs after reset_scene(), which would erase them."""
     PALETTE.update({
-        "#": pbr_material("Scales", "#2f9e5b", metallic=0.2, roughness=0.45),
+        "#": pbr_material("Scales", "#b17fe7dd", metallic=0.2, roughness=0.45),
         "*": pbr_material("Gold", "#f2bf3a", metallic=1.0, roughness=0.3),
         "e": pbr_material("Eye", "#ffb22e", emission="#ffa21a", strength=4.0),
         "o": pbr_material("Ember", "#ff6a1a", emission="#ff4a08", strength=3.0),
@@ -173,6 +173,8 @@ def build_tail(bm):
         ..o.
         """])
 
+def build_food(bm):
+    voxels(bm, [".... .oo. .oo. ...."] * 2)
 
 def build_floor(bm):
     voxels(bm, ["""
@@ -237,7 +239,7 @@ def lay_out_kit(scene):
     """One row per registry, so a GLB viewer shows a tidy catalog instead of every piece
     stacked on the origin. Each mesh is still modeled around its own cell's center."""
     spacing = 1.5
-    for row, registry in enumerate([PIECES, TILES]):
+    for row, registry in enumerate([PIECES, TILES, {"food": build_food}]):
         for column, (name, build) in enumerate(registry.items()):
             make_object(scene, name, build, location=(column * spacing, -row * spacing, 0))
 
