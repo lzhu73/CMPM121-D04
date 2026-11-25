@@ -35,7 +35,7 @@ func _ready() -> void:
 	score_label.add_theme_constant_override("outline_size", 4)
 
 	add_child(status_label)
-	status_label.set_anchors_and_offset_preset(Control.PRESET_CENTER)
+	status_label.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
 	status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	status_label.add_theme_font_size_override("font_size", 28)
 	status_label.add_theme_constant_override("outline_size", 6)
