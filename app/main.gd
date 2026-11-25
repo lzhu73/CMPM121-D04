@@ -16,9 +16,9 @@ var session := Session.new(GRID)
 var meshes := {}  # kit piece name -> Mesh, shared by everything that shows it (Flyweight)
 var segments: Array[MeshInstance3D] = []
 var camera := Camera3D.new()
-var _clock := 0.0
 var food_model := MeshInstance3D.new()
 var score_label := Label.new()
+var _clock := 0.0
 
 
 func _ready() -> void:
