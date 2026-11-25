@@ -18,6 +18,7 @@ func _init(grid_size: Vector2i) -> void:
 	rng.seed = 121
 	_place_food()
 
+
 func turn(direction: Vector2i) -> void:
 	if over:
 		return

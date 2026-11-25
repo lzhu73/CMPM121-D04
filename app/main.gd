@@ -43,7 +43,6 @@ func _ready() -> void:
 	_sync_all()
 
 
-
 ## Input arrives as events, so even a tap shorter than one frame is never missed.
 func _unhandled_input(event: InputEvent) -> void:
 	if session.over:
@@ -86,20 +85,22 @@ func _follow(delta: float) -> void:
 	if _shake > 0.0:
 		_shake = max(0.0, _shake - delta * 2.5)
 		camera.position += Vector3(
-			randf_range(-0.35, 0.35) * _shake,
-			0.0,
-			randf_range(-0.35, 0.35) * _shake
+			randf_range(-0.35, 0.35) * _shake, 0.0, randf_range(-0.35, 0.35) * _shake
 		)
 
 	camera.look_at(camera.position - CAMERA_OFFSET)
+
 
 func _on_crash() -> void:
 	_shake = 1.0
 	for i in session.dragon.body.size():
 		segments[i].rotation.x = randf_range(-0.06, 0.06)
 		segments[i].rotation.z = randf_range(-0.06, 0.06)
-	status_label.text = "CRASHED!\n\nFinal Score: %d\nPress Space or Enter to play again" % session.score
+	status_label.text = (
+		"CRASHED!\n\nFinal Score: %d\nPress Space or Enter to play again" % session.score
+	)
 	status_label.visible = true
+
 
 func _restart() -> void:
 	session = Session.new(GRID)
@@ -107,6 +108,7 @@ func _restart() -> void:
 	_shake = 0.0
 	camera.position = _center(session.dragon.body[0]) + CAMERA_OFFSET
 	_sync_all()
+
 
 func _sync_all() -> void:
 	status_label.text = "Press an arrow key to begin"
