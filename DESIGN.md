@@ -5,16 +5,12 @@ to learn where your project is headed. Replace each _italic prompt_.
 
 ## Target
 
-Our creature is a Sea Serpent, he it eats fish and lives in a cave by the sea. We want it to feel like our serpent is just looking for food and trying not to get knocked out by the wall. 
+Our creature is a Sea Serpent, he it eats fish and lives in a cave by the sea. We want it to feel like our serpent is just looking for food and trying not to get knocked out by the wall.
 
 ## Menu choices
 
-Two items from two different groups (see the D4 guide's "The menu" tab).
-
-| Item | Group | Done when (in your words) |
-| --- | --- | --- |
-| _item_ | _group_ | _what you will be able to show_ |
-| _item_ | _group_ | _what you will be able to show_ |
+| Power Ups | Sytems | Different food the Serpent can eat to gain different effects or bonuses |
+| Levels in text files | Language | Make at least three levels with different terrain setups |
 
 ## Words we use
 
