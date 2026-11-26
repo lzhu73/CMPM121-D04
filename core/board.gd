@@ -5,11 +5,7 @@ class_name Board
 extends RefCounted
 
 ## What each tile kind means to the rules.
-const TILES := {
-	"floor": {"solid": false},
-	"wall": {"solid": true},
-	"water": {"solid": false}
-}
+const TILES := {"floor": {"solid": false}, "wall": {"solid": true}, "water": {"solid": false}}
 
 var size: Vector2i
 var tiles := {}  # Vector2i cell -> tile kind name
@@ -26,6 +22,7 @@ static func bordered(grid_size: Vector2i) -> Board:
 	board.add_pond(Vector2i(10, 7), Vector2i(3, 2))
 	return board
 
+
 func add_pond(center: Vector2i, radius: Vector2i) -> void:
 	for x in range(center.x - radius.x, center.x + radius.x + 1):
 		for y in range(center.y - radius.y, center.y + radius.y + 1):
@@ -36,7 +33,6 @@ func add_pond(center: Vector2i, radius: Vector2i) -> void:
 			var dy := float(y - center.y) / maxf(radius.y, 0.5)
 			if dx * dx + dy * dy <= 1.0:
 				tiles[cell] = "water"
-				
 
 
 func kind_at(cell: Vector2i) -> String:
