@@ -8,6 +8,7 @@ extends RefCounted
 const TILES := {
 	"floor": {"solid": false},
 	"wall": {"solid": true},
+	"water": {"solid": false}
 }
 
 var size: Vector2i
@@ -22,7 +23,20 @@ static func bordered(grid_size: Vector2i) -> Board:
 		for y in grid_size.y:
 			var edge := x == 0 or y == 0 or x == grid_size.x - 1 or y == grid_size.y - 1
 			board.tiles[Vector2i(x, y)] = "wall" if edge else "floor"
+	board.add_pond(Vector2i(10, 7), Vector2i(3, 2))
 	return board
+
+func add_pond(center: Vector2i, radius: Vector2i) -> void:
+	for x in range(center.x - radius.x, center.x + radius.x + 1):
+		for y in range(center.y - radius.y, center.y + radius.y + 1):
+			var cell := Vector2i(x, y)
+			if kind_at(cell) != "floor":
+				continue
+			var dx := float(x - center.x) / maxf(radius.x, 0.5)
+			var dy := float(y - center.y) / maxf(radius.y, 0.5)
+			if dx * dx + dy * dy <= 1.0:
+				tiles[cell] = "water"
+				
 
 
 func kind_at(cell: Vector2i) -> String:

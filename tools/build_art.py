@@ -89,13 +89,15 @@ def srgb(hex_code):
 def make_materials():
     """One material per voxel character. Runs after reset_scene(), which would erase them."""
     PALETTE.update({
-        "#": pbr_material("Scales", "#b17fe7dd", metallic=0.2, roughness=0.45),
+        "#": pbr_material("Scales", "#0032a7dd", metallic=0.2, roughness=0.45),
         "*": pbr_material("Gold", "#f2bf3a", metallic=1.0, roughness=0.3),
-        "e": pbr_material("Eye", "#ffb22e", emission="#ffa21a", strength=4.0),
+        "$": pbr_material("Tongue", "#F874D7", roughness=1),
+        "e": pbr_material("Eye", "#002002", emission="#002c07", strength=4.0),
         "o": pbr_material("Ember", "#ff6a1a", emission="#ff4a08", strength=3.0),
-        "s": pbr_material("Stone", "#9e9883", roughness=0.85),
-        "t": pbr_material("Moss", "#6f8558", roughness=0.9),
-        "w": pbr_material("Brick", "#6b4d3d", roughness=0.9),
+        "s": pbr_material("Stone", "#53b8d1", roughness=0.85),
+        "t": pbr_material("Moss", "#35A465", roughness=0.9),
+        "w": pbr_material("Brick", "#000437", roughness=0.9),
+        "v": pbr_material("Water", "#18326edd", emission="#152757dd", strength=4.0)
     })
 
 
@@ -125,11 +127,17 @@ def voxels(bm, layers, below_ground=0):
 
 def build_head(bm):
     voxels(bm, ["""
+        .$..
+        ..$.
+        .$..
+        .$.
         .##.
         ####
         ####
         .##.
         """, """
+        ....
+        ....
         ....
         e##e
         .##.
@@ -137,8 +145,20 @@ def build_head(bm):
         """, """
         ....
         ....
+        ....
+        ....
+        *..*
         *..*
         ....
+        """, """
+        
+        ....
+        ....
+        ....
+        ....
+        ....
+        *..*
+        *..*
         """])
 
 
@@ -159,9 +179,13 @@ def build_straight(bm):
 def build_turn(bm):
     voxels(bm, ["""
         ....
+        ..##
         .###
         .###
-        .##.
+        """, """
+        ....
+        ....
+        ..*.
         """])
 
 
@@ -169,6 +193,17 @@ def build_tail(bm):
     voxels(bm, ["""
         .##.
         .##.
+        ..#.
+        ....
+        """, """
+        ....
+        .##.
+        .##.
+        ..#.
+        """, """
+        .... 
+        ....
+        ..#.
         ..#.
         ..o.
         """])
@@ -193,6 +228,14 @@ def build_wall(bm):
         wwww
         """] * 3)
 
+def build_water(bm):
+    voxels(bm, ["""
+    vvvv
+    vvvv
+    vvvv
+    vvvv
+    """] * 3)
+
 
 PIECES = {  # the dragon kit; the game finds each mesh by these names
     "head": build_head,
@@ -203,6 +246,7 @@ PIECES = {  # the dragon kit; the game finds each mesh by these names
 TILES = {  # one entry per kind in core/board.gd's TILES; a new kind is one builder and one line
     "floor": build_floor,
     "wall": build_wall,
+    "water": build_water,
 }
 
 
