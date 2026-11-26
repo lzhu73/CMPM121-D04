@@ -5,8 +5,7 @@ to learn where your project is headed. Replace each _italic prompt_.
 
 ## Target
 
-_One or two sentences: what is this creature, what does it eat, where does it live,
-and what should playing feel like?_
+Our creature is a Sea Serpent, he it eats fish and lives in a cave by the sea. We want it to feel like our serpent is just looking for food and trying not to get knocked out by the wall. 
 
 ## Menu choices
 

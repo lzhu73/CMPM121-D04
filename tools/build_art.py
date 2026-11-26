@@ -97,7 +97,8 @@ def make_materials():
         "s": pbr_material("Stone", "#53b8d1", roughness=0.85),
         "t": pbr_material("Moss", "#35A465", roughness=0.9),
         "w": pbr_material("Brick", "#000437", roughness=0.9),
-        "v": pbr_material("Water", "#18326edd", emission="#152757dd", strength=4.0)
+        "v": pbr_material("Water", "#18326edd", emission="#152757dd", strength=4.0),
+        "f": pbr_material("Fish", "#d2ffe6ff", roughness= 1 )
     })
 
 
@@ -209,7 +210,17 @@ def build_tail(bm):
         """])
 
 def build_food(bm):
-    voxels(bm, [".... .oo. .oo. ...."] * 2)
+    voxels(bm, ["""
+    .ff.
+    ffff
+    .ff.
+    ..f.
+    """, """
+    .ff.
+    wffw
+    ..f.
+    ....
+    """])
 
 def build_floor(bm):
     voxels(bm, ["""
